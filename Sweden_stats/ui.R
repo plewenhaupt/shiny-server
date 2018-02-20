@@ -21,7 +21,7 @@ library(lubridate)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Visualizations of Swedish statistics - Proof of concept"),
+  titlePanel("Visualizations of Swedish statistics - Proof of concept 1"),
   
     # Show a plot of the generated distribution
     mainPanel(
