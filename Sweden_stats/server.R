@@ -1,12 +1,7 @@
 library(shiny)
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(data.table)
 library(ggplot2)
 library(scales)
 library(plotly)
-library(lubridate)
 
 
 

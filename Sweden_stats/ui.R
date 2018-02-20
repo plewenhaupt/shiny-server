@@ -9,8 +9,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Population", plotlyOutput("popPlot")),
-        tabPanel("Summary"),
-        tabPanel("Table")
+        tabPanel("Summary")
       )
     )
   )
