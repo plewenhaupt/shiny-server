@@ -8,15 +8,18 @@ shinyUI(fluidPage(
   
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      
+      verbatimTextOutput("range"),
+      
+      sliderInput("slider1",
+                  "Years:",
+                  min = 1860,
+                  max = 2016,
+                  value = c(1860, 1900))
     ),
 
     mainPanel(
-    plotOutput("popPlot")
+    plotOutput("plot")
       )
     )
   )
