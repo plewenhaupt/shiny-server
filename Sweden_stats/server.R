@@ -2,6 +2,7 @@ options(shiny.sanitize.errors = FALSE)
 library(shiny)
 library(ggplot2)
 library(plotly)
+library(scales)
 
 source('datapull.R')
 
