@@ -1,6 +1,7 @@
 options(shiny.sanitize.errors = FALSE)
 library(shiny)
 library(ggplot2)
+library(plotly)
 
 
 shinyServer(function(input, output) {
@@ -14,8 +15,8 @@ shinyServer(function(input, output) {
     subset(populationdf, Year >= start() & Year <= end())
   })
    
-  output$plot <- renderPlot({
-    ggplot(pop(), aes(x=Year)) + geom_line(aes(y=Men, group=1), color="blue") + geom_line(aes(y=Women, group=1), color="red") + geom_line(aes(y=Total, group=1), color="green")
+  output$plot <- renderPlotly({
+    ggplotly(ggplot(pop(), aes(x=Year)) + geom_line(aes(y=Men, group=1), color="blue") + geom_line(aes(y=Women, group=1), color="red") + geom_line(aes(y=Total, group=1), color="green"))
   })
   
 })
