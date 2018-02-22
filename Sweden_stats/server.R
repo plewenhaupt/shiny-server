@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
   })
    
   output$plot <- renderPlotly({
-    ggplotly(ggplot(pop(), aes(x=Year)) + geom_line(aes(y=Men, group=1), color="blue") + geom_line(aes(y=Women, group=1), color="red") + geom_line(aes(y=Total, group=1), color="green"))
+    ggplotly(ggplot(pop(), aes(x=Year)) + geom_line(aes(y=Men, group=1), color="blue") + geom_line(aes(y=Women, group=1), color="red") + geom_line(aes(y=Total, group=1), color="green")) + ggtitle(label="Svensk befolkning 1860-2017")
   })
   
 })
