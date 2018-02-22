@@ -1,4 +1,4 @@
-
+options(shiny.sanitize.errors = FALSE)
 library(shiny)
 library(ggplot2)
 
