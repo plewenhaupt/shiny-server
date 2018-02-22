@@ -3,6 +3,8 @@ library(shiny)
 library(ggplot2)
 library(plotly)
 
+source('datapull.R')
+
 shinyUI(fluidPage(
   
   # Application title
@@ -15,9 +17,9 @@ shinyUI(fluidPage(
       
       sliderInput("slider1",
                   "Years:",
-                  min = 1860,
-                  max = 2017,
-                  value = c(1860, 2017))
+                  min = minYear,
+                  max = maxYear,
+                  value = c(minYear, maxYear))
     ),
 
     mainPanel(
