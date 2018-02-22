@@ -17,7 +17,7 @@ shinyUI(fluidPage(
                   "Years:",
                   min = 1860,
                   max = 2016,
-                  value = c(1860, 1900))
+                  value = c(1860, 2016))
     ),
 
     mainPanel(
