@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
     subset(populationdf, Year >= start() & Year <= end())
   })
    
-  output$plot <- renderPlotly({
+  output$popplot <- renderPlotly({
     ggplotly(ggplot(pop(), aes(x=Year)) 
     + geom_line(aes(y=Men, group=1), color="blue") 
     + geom_line(aes(y=Women, group=1), color="red") 

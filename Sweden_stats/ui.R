@@ -23,7 +23,7 @@ shinyUI(fluidPage(
         ),
 
         mainPanel(
-          plotlyOutput("plot")
+          plotlyOutput("popplot")
         )
       )
     ),
