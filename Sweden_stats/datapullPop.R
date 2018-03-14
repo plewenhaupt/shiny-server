@@ -2,39 +2,40 @@ library(jsonlite)
 library(dplyr)
 library(httr)
 
-url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860"
+Popurl <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860"
 
-requestBody <- paste0('{"query":[{"code":"Kon","selection":{"filter":"item","values":["1", "2"]}}],"response": {"format": "px"}}')
+PoprequestBody <- paste0('{"query":[{"code":"Kon","selection":{"filter":"item","values":["1", "2"]}}],"response": {"format": "px"}}')
 
-res <- httr::POST(url = url,
-                  body = requestBody,
+Popres <- httr::POST(url = Popurl,
+                  body = PoprequestBody,
                   encode = "json")
 
-c <- content(res)
+Popc <- content(Popres)
 
-r <- rawToChar(c)
+Popr <- rawToChar(Popc)
 
-x <- read.table(text = r, sep = "\n")
-x[1] <- as.character(x[,1])
+Popx <- read.table(text = Popr, sep = "\n")
+Popx[1] <- as.character(Popx[,1])
 
-y <- x[grep("^TIMEVAL", x[,1]),]
-Year <- y %>% strsplit(",") %>% unlist()
-Year <- Year[-1]
-Year[length(Year)] <- gsub(";", "", Year[length(Year)])
-Year <- as.numeric(Year)
+Popy <- Popx[grep("^TIMEVAL", Popx[,1]),]
+PopYear <- Popy %>% strsplit(",") %>% unlist()
+PopYear <- PopYear[-1]
+PopYear[length(PopYear)] <- gsub(";", "", PopYear[length(PopYear)])
+PopYear <- as.numeric(PopYear)
 
-maxYear <- max(Year)
-minYear <- min(Year)
+maxPopYear <- max(PopYear)
+minPopYear <- min(PopYear)
 
 
-DataRow <- which(x[,1] %in% "DATA=")
+PopDataRow <- which(Popx[,1] %in% "DATA=")
 #Male data
-m <- x[DataRow + 1,]
-Men <- m %>% strsplit(" ") %>% unlist() %>% as.numeric()
+Popm <- Popx[PopDataRow + 1,]
+PopMen <- Popm %>% strsplit(" ") %>% unlist() %>% as.numeric()
 
 #female data
-f <- x[DataRow + 2,]
-Women <- f %>% strsplit(" ") %>% unlist() %>% as.numeric()
+Popf <- Popx[PopDataRow + 2,]
+PopWomen <- Popf %>% strsplit(" ") %>% unlist() %>% as.numeric()
 
-populationdf <- as.data.frame(cbind(Year, Men, Women))
+populationdf <- as.data.frame(cbind(PopYear, PopMen, PopWomen))
+colnames(populationdf) <- c("Year", "Men", "Women")
 populationdf$Total <- populationdf$Men + populationdf$Women
