@@ -7,8 +7,8 @@ Popurl <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/Befo
 PoprequestBody <- paste0('{"query":[{"code":"Kon","selection":{"filter":"item","values":["1", "2"]}}],"response": {"format": "px"}}')
 
 Popres <- httr::POST(url = Popurl,
-                  body = PoprequestBody,
-                  encode = "json")
+                     body = PoprequestBody,
+                     encode = "json")
 
 Popc <- content(Popres)
 
@@ -36,6 +36,10 @@ PopMen <- Popm %>% strsplit(" ") %>% unlist() %>% as.numeric()
 Popf <- Popx[PopDataRow + 2,]
 PopWomen <- Popf %>% strsplit(" ") %>% unlist() %>% as.numeric()
 
-populationdf <- as.data.frame(cbind(PopYear, PopMen, PopWomen))
+populationdf <- as_tibble(cbind(PopYear, PopMen, PopWomen))
 colnames(populationdf) <- c("Year", "Men", "Women")
 populationdf$Total <- populationdf$Men + populationdf$Women
+
+yoy <- 0
+yoy <- append(yoy, diff(populationdf$Total))
+populationdf$Relative_Growth <- yoy

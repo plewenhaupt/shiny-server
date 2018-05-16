@@ -39,7 +39,10 @@ body <- dashboardBody(tabItems(
                           min = minPopYear,
                           max = maxPopYear,
                           value = c(minPopYear, maxPopYear))
-            )),
+            ),
+            
+            box(plotlyOutput("relpopplot"))
+            ),
             
           fluidRow(
             box(plotlyOutput("ageplot")),

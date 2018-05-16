@@ -10,7 +10,6 @@ library(forecast)
 #The data is pulled from the SCB database through API calls.
 source('datapullPop.R')
 source('datapullDebt.R')
-source('datapullBNPanv.R')
 source('datapull_Mean_Age.R')
 
 # SERVER  #######################################################################
@@ -51,6 +50,14 @@ shinyServer(function(input, output) {
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
              + ggtitle(label="Swedish Population Growth"))
+  })
+  
+  output$relpopplot <- renderPlotly({
+    ggplotly(ggplot(pop(), aes(x=Year)) 
+             + geom_bar(aes(y=Relative_Growth), color="blue", stat = "identity") 
+             + scale_y_continuous(labels = comma) 
+             + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
+             + ggtitle(label="Relative Population Growth"))
   })
   
   output$ageplot <- renderPlotly({

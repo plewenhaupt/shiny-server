@@ -36,6 +36,10 @@ PopMen <- Popm %>% strsplit(" ") %>% unlist() %>% as.numeric()
 Popf <- Popx[PopDataRow + 2,]
 PopWomen <- Popf %>% strsplit(" ") %>% unlist() %>% as.numeric()
 
-populationdf <- as.data.frame(cbind(PopYear, PopMen, PopWomen))
+populationdf <- as_tibble(cbind(PopYear, PopMen, PopWomen))
 colnames(populationdf) <- c("Year", "Men", "Women")
 populationdf$Total <- populationdf$Men + populationdf$Women
+
+yoy <- 0
+yoy <- append(yoy, diff(populationdf$Total))
+populationdf$yoy <- yoy
