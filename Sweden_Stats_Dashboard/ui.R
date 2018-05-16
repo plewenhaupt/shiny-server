@@ -31,19 +31,20 @@ body <- dashboardBody(tabItems(
   tabItem(tabName = "population",
           fluidRow(
             box(plotlyOutput("popplot")),
-            
-            box(
-              title = "Years - Population Growth",
-              sliderInput("slider1",
-                          "Years:",
-                          min = minPopYear,
-                          max = maxPopYear,
-                          value = c(minPopYear, maxPopYear))
+            box(plotlyOutput("relpopplot"))
             ),
-            
-            box(plotlyOutput("relpopplot", height = "200"))
-            ),
-            
+          
+          
+          fluidRow(box(width=12,
+            title = "Years - Population Growth",
+            sliderInput("slider1",
+                        "Years:",
+                        min = minPopYear,
+                        max = maxPopYear,
+                        value = c(minPopYear, maxPopYear))
+          )),
+          
+          
           fluidRow(
             box(plotlyOutput("ageplot")),
             
