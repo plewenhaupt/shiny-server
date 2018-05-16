@@ -29,7 +29,7 @@ body <- dashboardBody(tabItems(
   # First tab content
   tabItem(tabName = "population",
           fluidRow(
-            box(plotlyOutput("popplot", height = 500)),
+            box(plotlyOutput("popplot")),
             
             box(
               title = "Controls",
@@ -45,7 +45,7 @@ body <- dashboardBody(tabItems(
   # Second tab content
   tabItem(tabName = "finances",
           fluidRow(
-            box(plotlyOutput("Debtplot", height = 500)),
+            box(plotlyOutput("Debtplot")),
             
             box(
               dateRangeInput("DebtDate",
