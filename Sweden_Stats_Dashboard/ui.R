@@ -32,6 +32,8 @@ body <- dashboardBody(tabItems(
           fluidRow(
             box(plotlyOutput("popplot")),
             
+            box(plotlyOutput("ageplot")),
+            
             box(
               title = "Years - Population Growth",
               sliderInput("slider1",
@@ -40,8 +42,6 @@ body <- dashboardBody(tabItems(
                           max = maxPopYear,
                           value = c(minPopYear, maxPopYear))
             ),
-            
-            box(plotlyOutput("ageplot")),
             
             box(
               title = "Years - Mean Age",
