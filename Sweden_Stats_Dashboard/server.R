@@ -42,7 +42,7 @@ shinyServer(function(input, output) {
              + geom_line(aes(y=Total, group=1), color="green") 
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
-             + ggtitle(label="Swedish Population Growth"))
+             + ggtitle(label="Swedish Population Growth")) %>% config(displayModeBar = F)
   })
   
   
