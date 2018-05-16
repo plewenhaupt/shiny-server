@@ -19,7 +19,7 @@ header <- dashboardHeader(title = "Statistics Sweden")
 sidebar <-   dashboardSidebar(
   sidebarMenu(
     menuItem("Population", tabName = "population", icon = icon("male")),
-    menuItem("Finances", tabName = "finances", icon = icon("money-bill"))
+    menuItem("Finances", tabName = "finances", icon = icon("money"))
   )
 )
 
