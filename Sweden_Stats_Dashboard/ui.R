@@ -41,7 +41,7 @@ body <- dashboardBody(tabItems(
                           value = c(minPopYear, maxPopYear))
             ),
             
-            box(plotlyOutput("relpopplot"))
+            box(plotlyOutput("relpopplot", height = "200"))
             ),
             
           fluidRow(
