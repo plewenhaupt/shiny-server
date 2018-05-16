@@ -19,7 +19,7 @@ header <- dashboardHeader(title = "Statistics Sweden")
 sidebar <-   dashboardSidebar(
   sidebarMenu(
     menuItem("Population", tabName = "population", icon = icon("male")),
-    menuItem("Finances", tabName = "finances", icon = icon("coins"))
+    menuItem("Finances", tabName = "finances", icon = icon("money-bill"))
   )
 )
 
@@ -45,7 +45,7 @@ body <- dashboardBody(tabItems(
   # Second tab content
   tabItem(tabName = "finances",
           fluidRow(
-            box(plotlyOutput("Debtplot", height = 250)),
+            box(plotlyOutput("Debtplot", height = 500)),
             
             box(
               dateRangeInput("DebtDate",

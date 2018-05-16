@@ -42,7 +42,7 @@ shinyServer(function(input, output) {
              + geom_line(aes(y=Total, group=1), color="green") 
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
-             + ggtitle(label=paste("Sveriges befolkning ", as.character(minPopYear), " - ", as.character(maxPopYear), sep="")))
+             + ggtitle(label="Swedish Population Growth"))
   })
   
   
@@ -51,7 +51,7 @@ shinyServer(function(input, output) {
     ggplotly(ggplot(NatDebtdf, aes(x=Datum, text=paste0("Date: ", as.Date(Datum)))) 
              + geom_line(aes(y=Debt, group=1))
              + theme(axis.title=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25))
-             + ggtitle(label="Sveriges statsskuld"), tooltip=c("y", "text"))
+             + ggtitle(label="Swedish National Debt"), tooltip=c("y", "text"))
   })
   
   
