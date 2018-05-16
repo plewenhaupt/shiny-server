@@ -32,12 +32,23 @@ body <- dashboardBody(tabItems(
             box(plotlyOutput("popplot")),
             
             box(
-              title = "Controls",
+              title = "Years - Population Growth",
               sliderInput("slider1",
                           "Years:",
                           min = minPopYear,
                           max = maxPopYear,
                           value = c(minPopYear, maxPopYear))
+            ),
+            
+            box(plotlyOutput("ageplot")),
+            
+            box(
+              title = "Years - Mean Age",
+              sliderInput("slider2",
+                          "Years:",
+                          min = minMeanAgeYear,
+                          max = maxMeanAgeYear,
+                          value = c(minMeanAgeYear, maxMeanAgeYear))
             )
           )
   ),
