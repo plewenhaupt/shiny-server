@@ -29,7 +29,7 @@ body <- dashboardBody(tabItems(
   # First tab content
   tabItem(tabName = "population",
           fluidRow(
-            box(plotlyOutput("popplot", height = 250)),
+            box(plotlyOutput("popplot", height = 500)),
             
             box(
               title = "Controls",
