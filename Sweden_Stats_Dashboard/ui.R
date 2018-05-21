@@ -32,9 +32,12 @@ body <- dashboardBody(tabItems(
   # First tab content
   tabItem(tabName = "population",
           fluidRow(
-            box(plotlyOutput("popplot")),
-            box(plotlyOutput("relpopplot"))
+            box(width=12, plotlyOutput("popplot"))
             ),
+          
+          fluidRow(
+            box(width=12, plotlyOutput("relpopplot"))
+          ),
           
           
           fluidRow(box(width=12,
