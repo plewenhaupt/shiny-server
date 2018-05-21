@@ -24,12 +24,12 @@ sidebar <-   dashboardSidebar(
     menuItem("Population", tabName = "population", icon = icon("male")),
     conditionalPanel("input.sidebarmenu === 'population'",
     sliderInput("slider1",
-                "Population - Years:",
+                "Population (Years)",
                 min = minPopYear,
                 max = maxPopYear,
                 value = c(minPopYear, maxPopYear)),
     sliderInput("slider2",
-                "Births and Deaths - Years:",
+                "Births, Deaths, Mean Age (Years)",
                 min = minBornYear,
                 max = maxBornYear,
                 value = c(minBornYear, maxBornYear))
@@ -40,53 +40,44 @@ sidebar <-   dashboardSidebar(
 
 
 # BODY  #########################################################################
-body <- dashboardBody(tabItems(
+body <- 
+  
+dashboardBody(
+  tabItems(
   # First tab content
-  tabItem(tabName = "population",
-          fluidRow(
-            column(width=6,
-            box(width=12, plotlyOutput("popplot")),
-          
-            box(width=12, plotlyOutput("relpopplot"))
-            ),
-          
-          fluidRow(
-            column(width=6,
-            box(width=12, plotlyOutput("borndeadplot"))
-          )),
-          
-          fluidRow(
-            box(plotlyOutput("ageplot")),
+    tabItem(tabName = "population",
+            fluidRow(
+              column(width=6,
+              box(width=12, plotlyOutput("popplot")),
+              box(width=12, plotlyOutput("relpopplot"))
+              ),
             
-            box(
-              title = "Years - Mean Age",
-              sliderInput("slider3",
-                          "Years:",
-                          min = minMeanAgeYear,
-                          max = maxMeanAgeYear,
-                          value = c(minMeanAgeYear, maxMeanAgeYear))
-            ))
-          )
-  ),
+              column(width=6,
+              box(width=12, plotlyOutput("borndeadplot")),
+              box(width=12, plotlyOutput("ageplot"))
+              )
+            )
+    ),
   
   # Second tab content
-  tabItem(tabName = "finances",
-          fluidRow(
-            box(plotlyOutput("Debtplot")),
-            
-            box(
-              dateRangeInput("DebtDate",
-                             "Years:",
-                             min = minDebtDate,
-                             max = maxDebtDate,
-                             start = minDebtDate, 
-                             end = maxDebtDate,
-                             format ="yyyy-mm-dd",
-                             weekstart = 1,
-                             startview = "year")
+    tabItem(tabName = "finances",
+            fluidRow(
+              box(plotlyOutput("Debtplot")),
+              
+              box(
+                dateRangeInput("DebtDate",
+                               "Years:",
+                               min = minDebtDate,
+                               max = maxDebtDate,
+                               start = minDebtDate, 
+                               end = maxDebtDate,
+                               format ="yyyy-mm-dd",
+                               weekstart = 1,
+                               startview = "year")
+              )
             )
-          )
-  )
+    )
+  
   )
 )
 

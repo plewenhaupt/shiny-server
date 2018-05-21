@@ -46,7 +46,7 @@ shinyServer(function(input, output) {
   })
   
   age <- reactive({
-    subset(MeanAgedf, Year >= MeanAgestart() & Year <= MeanAgeend())
+    subset(MeanAgedf, Year >= Bornstart() & Year <= Bornend())
   })
   
   
