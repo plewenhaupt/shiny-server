@@ -44,16 +44,16 @@ body <- dashboardBody(tabItems(
   # First tab content
   tabItem(tabName = "population",
           fluidRow(
-            box(width=12, plotlyOutput("popplot"))
+            column(width=6,
+            box(width=12, plotlyOutput("popplot")),
+          
+            box(width=12, plotlyOutput("relpopplot"))
             ),
           
           fluidRow(
-            box(width=12, plotlyOutput("relpopplot"))
-          ),
-          
-          fluidRow(
+            column(width=6,
             box(width=12, plotlyOutput("borndeadplot"))
-          ),
+          )),
           
           fluidRow(
             box(plotlyOutput("ageplot")),
@@ -65,7 +65,7 @@ body <- dashboardBody(tabItems(
                           min = minMeanAgeYear,
                           max = maxMeanAgeYear,
                           value = c(minMeanAgeYear, maxMeanAgeYear))
-            )
+            ))
           )
   ),
   
@@ -89,6 +89,7 @@ body <- dashboardBody(tabItems(
   )
   )
 )
+
 
 
 # PAGE  #########################################################################
