@@ -11,6 +11,8 @@ library(forecast)
 source('datapullPop.R')
 source('datapullDebt.R')
 source('datapull_Mean_Age.R')
+source('datapull_Born.R')
+source('datapull_Dead.R')
 
 # SERVER  #######################################################################
 shinyServer(function(input, output) {
@@ -19,8 +21,11 @@ shinyServer(function(input, output) {
   Popstart <- reactive({input$slider1[1]})
   Popend <- reactive({input$slider1[2]})
   
-  MeanAgestart <- reactive({input$slider2[1]})
-  MeanAgeend <- reactive({input$slider2[2]})
+  Bornstart <- reactive({input$slider2[1]})
+  Bornend <- reactive({input$slider2[2]})
+  
+  MeanAgestart <- reactive({input$slider3[1]})
+  MeanAgeend <- reactive({input$slider3[2]})
   
   #Debtstart <- reactive({input$DebtDate[1]})
   #Debtend <- reactive({input$DebtDate[2]})
@@ -28,7 +33,16 @@ shinyServer(function(input, output) {
   
   #Dataframes
   pop <- reactive({
-    subset(populationdf, Year >= Popstart() & Year <= Popend())
+    subset(Popdf, Year >= Popstart() & Year <= Popend())
+  })
+  
+  #Combine born and dead dfs
+  
+  BornDeaddf <- full_join(Borndf, Deaddf)
+  Births_Deaths_Diff <- BornDeaddf$Births_Total - BornDeaddf$Deaths_Total
+  
+  borndead <- reactive({
+    subset(BornDeaddf, Year >= Bornstart() & Year <= Bornend())
   })
   
   age <- reactive({
@@ -43,21 +57,41 @@ shinyServer(function(input, output) {
 # OUTPUTS #######################################################################
   #Population plot
   output$popplot <- renderPlotly({
-    ggplotly(ggplot(pop(), aes(x=Year)) 
+    
+    popplot <- ggplotly(ggplot(pop(), aes(x=Year)) 
              + geom_line(aes(y=Men, group=1), color="blue") 
              + geom_line(aes(y=Women, group=1), color="red") 
              + geom_line(aes(y=Total, group=1), color="green") 
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
              + ggtitle(label="Swedish Population Growth"))
+    
+    popplot <- popplot %>% config(displayModeBar = F)
   })
   
   output$relpopplot <- renderPlotly({
-    ggplotly(ggplot(pop(), aes(x=Year)) 
-             + geom_bar(aes(y=Relative_Growth), color="blue", stat = "identity") 
+    relpopplot <- ggplotly(ggplot(pop(), aes(x=Year)) 
+             + geom_line(aes(y=Relative_Growth, group=1), color="black") 
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
              + ggtitle(label="Relative Population Growth"))
+    
+    relpopplot <- relpopplot %>% config(displayModeBar = F)
+  })
+  
+  output$borndeadplot <- renderPlotly({
+    borndeadplot <- ggplotly(ggplot(borndead(), aes(x=Year)) 
+             + geom_line(aes(y=Births_Men, group=1), color="dodgerblue2") 
+             + geom_line(aes(y=Births_Women, group=1), color="red") 
+             + geom_line(aes(y=Births_Total, group=1), color="green") 
+             + geom_line(aes(y=Deaths_Men, group=1), color="blue") 
+             + geom_line(aes(y=Deaths_Women, group=1), color="darkred") 
+             + geom_line(aes(y=Deaths_Total, group=1), color="palegreen4") 
+             + scale_y_continuous(labels = comma) 
+             + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
+             + ggtitle(label="Births and Deaths per Year"))
+    
+    borndeadplot <- borndeadplot %>% config(displayModeBar = F)
   })
   
   output$ageplot <- renderPlotly({

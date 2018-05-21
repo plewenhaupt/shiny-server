@@ -8,6 +8,8 @@ library(scales)
 source('datapullPop.R')
 source('datapullDebt.R')
 source('datapull_Mean_Age.R')
+source('datapull_Born.R')
+source('datapull_Dead.R')
 
 
 
@@ -44,13 +46,25 @@ body <- dashboardBody(tabItems(
                         value = c(minPopYear, maxPopYear))
           )),
           
+          fluidRow(
+            box(width=12, plotlyOutput("borndeadplot"))
+          ),
+          
+          fluidRow(box(width=12,
+                       title = "Births and Death",
+                       sliderInput("slider2",
+                                   "Years:",
+                                   min = minBornYear,
+                                   max = maxBornYear,
+                                   value = c(minBornYear, maxBornYear))
+          )),
           
           fluidRow(
             box(plotlyOutput("ageplot")),
             
             box(
               title = "Years - Mean Age",
-              sliderInput("slider2",
+              sliderInput("slider3",
                           "Years:",
                           min = minMeanAgeYear,
                           max = maxMeanAgeYear,
