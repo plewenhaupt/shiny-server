@@ -73,8 +73,6 @@ shinyServer(function(input, output) {
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
              + ggtitle(label="Relative Population Growth"))
-    
-    relpopplot <- relpopplot %>% config(displayModeBar = F)
   })
   
   output$borndeadplot <- renderPlotly({
@@ -88,8 +86,6 @@ shinyServer(function(input, output) {
              + scale_y_continuous(labels = comma) 
              + theme(axis.title.y=element_blank(), axis.text.y=element_text(size = 7), plot.margin = margin(10, 10, 20, 25)) 
              + ggtitle(label="Births and Deaths per Year"))
-    
-    borndeadplot <- borndeadplot %>% config(displayModeBar = F)
   })
   
   output$ageplot <- renderPlotly({
