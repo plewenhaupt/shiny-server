@@ -20,8 +20,20 @@ header <- dashboardHeader(title = "Statistics Sweden")
 
 # SIDEBAR #######################################################################
 sidebar <-   dashboardSidebar(
-  sidebarMenu(
+  sidebarMenu(id="sidebarmenu",
     menuItem("Population", tabName = "population", icon = icon("male")),
+    conditionalPanel("input.sidebarmenu === 'population'",
+    sliderInput("slider1",
+                "Population - Years:",
+                min = minPopYear,
+                max = maxPopYear,
+                value = c(minPopYear, maxPopYear)),
+    sliderInput("slider2",
+                "Births and Deaths - Years:",
+                min = minBornYear,
+                max = maxBornYear,
+                value = c(minBornYear, maxBornYear))
+    ),
     menuItem("Finances", tabName = "finances", icon = icon("money"))
   )
 )
@@ -39,28 +51,9 @@ body <- dashboardBody(tabItems(
             box(width=12, plotlyOutput("relpopplot"))
           ),
           
-          
-          fluidRow(box(width=12,
-            title = "Years - Population Growth",
-            sliderInput("slider1",
-                        "Years:",
-                        min = minPopYear,
-                        max = maxPopYear,
-                        value = c(minPopYear, maxPopYear))
-          )),
-          
           fluidRow(
             box(width=12, plotlyOutput("borndeadplot"))
           ),
-          
-          fluidRow(box(width=12,
-                       title = "Births and Death",
-                       sliderInput("slider2",
-                                   "Years:",
-                                   min = minBornYear,
-                                   max = maxBornYear,
-                                   value = c(minBornYear, maxBornYear))
-          )),
           
           fluidRow(
             box(plotlyOutput("ageplot")),
